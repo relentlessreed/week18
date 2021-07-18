@@ -4,7 +4,7 @@ const Workout = require("../models/workout.js");
 
 //This is one spot where we will use the aggregate function
 router.get("/api/workouts", (req, res) => {
-    Workout.create(body)
+    Workout.findAll(body)
         .then(dbWorkout => {
             res.json(dbWorkout);
         })

@@ -2,8 +2,15 @@ const router = require("express").Router();
 const path = require("path");
 
 //This is one spot where we will use the aggregate function
+
 router.get("/api/workouts", (req, res) => {
-    Workout.create(body)
+    Workout.aggegate([
+        {
+            $addFields: {
+                totalDuration: { $sum: "$exercises.duration" }
+            }
+        }
+    ])
         .then(dbWorkout => {
             res.json(dbWorkout);
         })
@@ -33,6 +40,23 @@ router.post("/api/workouts", ({ body }, res) => {
 });
 
 //This is another spot where we will use the aggregate function
+
+router.get("/api/workouts", (req, res) => {
+    Workout.aggegate([
+        {
+            $addFields: {
+                totalDuration: { $sum: "$exercises.duration" }
+            }
+        }
+    ])
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.status(400).json(err);
+        });
+});
+
 router.get("/api/workouts/range", (req, res) => {
     Workout.find({})
         .sort({ date: -1 })
