@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan")
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 3001;
+const path = require("path");
 const app = express();
 app.use(logger("dev"));
 
@@ -13,16 +13,24 @@ app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", {
     useNewUrlParser: true,
-    useFindAndModify: false
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
 });
 
 // routes
+app.get("/exercise", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/exercise.html"));
+});
+app.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/stats.html"));
+});
 
 // Deals with Data
 app.use(require("./routes/api.js"));
 
 // Deals with HTML files that our font end wants to see
-app.use(require("./routes/pages.js"));
+// app.use(require("./routes/pages.js"));
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
