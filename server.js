@@ -29,9 +29,6 @@ app.get("/stats", (req, res) => {
 // Deals with Data
 app.use(require("./routes/api.js"));
 
-// Deals with HTML files that our font end wants to see
-// app.use(require("./routes/pages.js"));
-
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
 });

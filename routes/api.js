@@ -2,8 +2,6 @@ const router = require("express").Router();
 const { db } = require("../models/workout.js");
 const { Workout } = require("../models");
 
-//This is one spot where we will use the aggregate function
-
 router.get("/api/workouts", (req, res) => {
     Workout.aggregate([
         {
@@ -19,16 +17,6 @@ router.get("/api/workouts", (req, res) => {
             res.status(400).json(err);
         });
 });
-
-// router.get("/api/workouts", (req, res) => {
-//     Workout.find({})
-//         .then(dbWorkout => {
-//             res.json(dbWorkout);
-//         })
-//         .catch(err => {
-//             res.status(400).json(err);
-//         });
-// });
 
 router.put("/api/workouts/:id", (req, res) => {
     Workout.findOneAndUpdate({ _id: req.params.id }, { $push: { exercises: req.body } }, { new: true })
@@ -50,7 +38,6 @@ router.post("/api/workouts", ({ body }, res) => {
         });
 });
 
-//This is another spot where we will use the aggregate function
 router.get("/api/workouts/range", (req, res) => {
     Workout.aggregate([
         {
