@@ -1,6 +1,7 @@
 # Fitness Tracker ![MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
-![Screenshot](fitnesstrackerscreenshot.png)
+![Screenshot](fitnesstrackerscreenshot.png)  
+[Link To Deployed Application](https://workout-tracker-week18.herokuapp.com/)
 
 # Description
 
